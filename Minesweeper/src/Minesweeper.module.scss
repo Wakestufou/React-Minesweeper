@@ -1,0 +1,84 @@
+.title {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+
+    & > div {
+        border: 1px solid #000;
+        border-radius: .3rem;
+        padding: 1rem;
+        box-shadow: 0 0 10px lighter(#000, 0%);
+    }
+
+    & .label {
+        font-weight: bold;
+        margin-right: .5rem;
+    }
+    
+    & .input {
+        border: 1px solid #000;
+        text-align: center;
+        font-weight: bold;
+        border-radius: .3rem;
+        margin-right: 1rem;
+        width: 2rem;
+    }
+    
+    & .button {
+        border: 1px solid #000;
+        border-radius: .3rem;
+        padding: .5rem 1rem;
+        background-color: #fff;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+    
+        &:hover {
+            background-color: #000;
+            color: #fff;
+        }
+    }
+}
+
+.board {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+
+    & > tbody {
+        background-color: #333;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #000;
+        padding: .5rem;
+    }
+
+    & .cell {
+        width: 30px;
+        height: 30px;
+        border: 1px solid #000;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+
+        &.revealed {
+            background-color: #666;
+            color: #fff;
+            cursor: default;
+        }
+
+        &.danger {
+            background-color: #f00;
+        }
+    }
+}
