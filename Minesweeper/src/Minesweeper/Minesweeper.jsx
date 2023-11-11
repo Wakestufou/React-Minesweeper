@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { generateBoard } from "./utils/generateBoard";
+import { generateBoard } from "../utils/generateBoard";
 import styles from './Minesweeper.module.scss'
-import { GameOver } from "./GameOver/GameOver";
+import { GameOver } from "../GameOver/GameOver";
 
 function Minesweeper() {
 	const [board, setBoard] = useState(generateBoard(10, 10, 10));
