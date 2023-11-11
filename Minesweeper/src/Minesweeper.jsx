@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { generateBoard } from "./utils/generateBoard";
 import styles from './Minesweeper.module.scss'
+import { GameOver } from "./GameOver/GameOver";
 
 function Minesweeper() {
 	const [board, setBoard] = useState(generateBoard(10, 10, 10));
@@ -8,6 +9,7 @@ function Minesweeper() {
 	const [timeOut, setTimeOut] = useState([]);
 	const [showForm, setShowForm] = useState(false);
 	const [error, setError] = useState("");
+	const [showResult, setShowResult] = useState(false);
 
 	function newGame(e) {
 		setError(() => "");
@@ -76,6 +78,7 @@ function Minesweeper() {
 		const {lose, win} = checkLose(newBoard);
 		if (lose || win) {
 			setGameOver({lose, win});
+			setShowResult(true);
 			const bombToReveal = newBoard.flatMap((row) => row.filter(cell => cell.value === "X" && !cell.revealed));
 			// Reveals all bombs one by one
 			const timeOut = bombToReveal.map((cell, i) => {
@@ -97,6 +100,10 @@ function Minesweeper() {
 		newBoard[i][j].flagged = !newBoard[i][j].flagged;
 		setBoard(newBoard);
 	}
+
+	function onClickGameOver() {
+		setShowResult(false);
+	}
 	
 
 	return (
@@ -113,8 +120,7 @@ function Minesweeper() {
 				<button type="submit" className={styles.button}>New Game</button>
 			</div>
 		</form>
-		{gameOver.lose && <h2>Game Over</h2>}
-		{gameOver.win && <h2>You Win</h2>}
+		{(showResult) && <GameOver onClick={onClickGameOver} result={gameOver.lose ? false : true}/>}
 		{error && <h2 className={styles.error}>{error}</h2>}
 		<table className={styles.board}>
 			<tbody>
