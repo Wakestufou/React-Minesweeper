@@ -1,4 +1,8 @@
 export function generateBoard(rows, cols, mines) {
+    if (mines > rows * cols) {
+        throw new Error('Too many mines!');
+    }
+    
     const board = Array.from({ length: rows }, (_, i) => Array.from({ length: cols }, (_, j) => ({ value: "", revealed: false, flagged: false, i, j })));
     
     while (mines > 0) {

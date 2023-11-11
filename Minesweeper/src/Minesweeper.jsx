@@ -7,12 +7,20 @@ function Minesweeper() {
 	const [gameOver, setGameOver] = useState({lose: false, win: false});
 	const [timeOut, setTimeOut] = useState([]);
 	const [showForm, setShowForm] = useState(false);
+	const [error, setError] = useState("");
 
 	function newGame(e) {
+		setError(() => "");
 		e.preventDefault();
 		timeOut.forEach((timeout) => clearTimeout(timeout));
 		setTimeOut([]);
-		setBoard(generateBoard(e.target.width.value, e.target.height.value, e.target.mines.value));
+		try {
+			setBoard(generateBoard(e.target.width.value, e.target.height.value, e.target.mines.value));
+		}
+		catch (err) {
+			setError(() => err.message);
+			return;
+		}
 		setGameOver(false);
 	}
 
@@ -68,7 +76,7 @@ function Minesweeper() {
 		const {lose, win} = checkLose(newBoard);
 		if (lose || win) {
 			setGameOver({lose, win});
-			const bombToReveal = newBoard.map((row) => row.filter(cell => cell.value === "X" && !cell.revealed)).flat();
+			const bombToReveal = newBoard.flatMap((row) => row.filter(cell => cell.value === "X" && !cell.revealed));
 			// Reveals all bombs one by one
 			const timeOut = bombToReveal.map((cell, i) => {
 				return setTimeout(() => {
@@ -97,9 +105,9 @@ function Minesweeper() {
 		<form onSubmit={(e) => newGame(e)} className={`${styles.form} ${showForm ? styles.showForm : ""}`}>
 			<div>
 				<label htmlFor="width" className={styles.label}>Width :</label>
-				<input type="number" id="width" min={0} defaultValue={10} className={styles.input}/>
+				<input type="number" id="width" min={0} max={40} defaultValue={10} className={styles.input}/>
 				<label htmlFor="height" className={styles.label} >Height :</label>
-				<input type="number" id="height" min={0} defaultValue={10} className={styles.input}/>
+				<input type="number" id="height" min={0} max={40} defaultValue={10} className={styles.input}/>
 				<label htmlFor="mines" className={styles.label}>Mines :</label>
 				<input type="number" id="mines" min={0} defaultValue={10} className={styles.input}/>
 				<button type="submit" className={styles.button}>New Game</button>
@@ -107,6 +115,7 @@ function Minesweeper() {
 		</form>
 		{gameOver.lose && <h2>Game Over</h2>}
 		{gameOver.win && <h2>You Win</h2>}
+		{error && <h2 className={styles.error}>{error}</h2>}
 		<table className={styles.board}>
 			<tbody>
 				{board.map((row, i) => (

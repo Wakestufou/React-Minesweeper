@@ -5,6 +5,13 @@
     width: 100%;
 }
 
+.error {
+    color: red;
+    font-weight: bold;
+    margin-top: 1rem;
+    text-align: center;
+}
+
 .form {
     display: flex;
     justify-content: center;
