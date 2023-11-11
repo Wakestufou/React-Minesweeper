@@ -6,4 +6,4 @@ export function GameOver({ onClick, result }) {
             <h2>{!result ? "Game Over" : "You win !"}</h2>
         </div>
     )
-}
+} 
