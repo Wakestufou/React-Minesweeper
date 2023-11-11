@@ -2,6 +2,7 @@ import { useState } from "react"
 import { generateBoard } from "../utils/generateBoard";
 import styles from './Minesweeper.module.scss'
 import { GameOver } from "../GameOver/GameOver";
+import { DarkModeToggle } from "../DarkModeToggle/DarkModeToggle";
 
 function Minesweeper() {
 	const [board, setBoard] = useState(generateBoard(10, 10, 10));
@@ -109,6 +110,9 @@ function Minesweeper() {
 	return (
 		<>
 		<h1 className={styles.title} onClick={() => setShowForm(s => !s)}>Minesweeper</h1>
+		<div className={styles.topRight}>
+			<DarkModeToggle />
+		</div>
 		<form onSubmit={(e) => newGame(e)} className={`${styles.form} ${showForm ? styles.showForm : ""}`}>
 			<div>
 				<label htmlFor="width" className={styles.label}>Width :</label>

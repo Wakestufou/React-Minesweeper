@@ -4,6 +4,15 @@
     text-align: center;
     width: 100%;
     font-family: 'LVDC Game Over 2', sans-serif;
+    color: var(--color-foreground);
+}
+
+.topRight {
+    display: absolute;
+    right: 0;
+    top: 0;
+    position: fixed;
+    margin: 1rem;
 }
 
 .error {
@@ -29,6 +38,7 @@
     & .label {
         font-weight: bold;
         margin-right: .5rem;
+        color: var(--color-foreground);
     }
     
     & .input {
@@ -44,13 +54,15 @@
         border: 1px solid #000;
         border-radius: .3rem;
         padding: .5rem 1rem;
-        background-color: #fff;
+        background-color: var(--color-foreground);
+        color: var(--color-background);
         cursor: pointer;
         transition: all 0.2s ease-in-out;
     
         &:hover {
-            background-color: #000;
-            color: #fff;
+            
+            background-color:  var(--color-background);
+            color: var(--color-foreground);
         }
     }
 }

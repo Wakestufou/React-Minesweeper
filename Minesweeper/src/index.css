@@ -1,0 +1,15 @@
+body {
+    --color-background: #fafafa;
+    --color-foreground: #1f2023;
+    background-color: var(--color-background);
+    transition: all 0.25s ease-in-out;
+}
+
+
+body.dark {
+    --color-background: #1f2023;
+    --color-foreground: #efefef;
+    background-color: var(--color-background);
+    transition: all 0.25s ease-in-out;
+}
+  
